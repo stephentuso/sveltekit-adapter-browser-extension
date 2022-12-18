@@ -100,7 +100,11 @@ export default function ({ pages = 'build', assets = pages, manifestVersion = 3,
 
 			builder.writeClient(assets)
 
-			builder.writePrerendered(pages, { fallback });
+			builder.writePrerendered(pages);
+
+			if (fallback) {
+				builder.generateFallback(join(pages, fallback));
+			}
 
 			const index_page = join(assets, 'index.html')
 			const index = readFileSync(index_page)
